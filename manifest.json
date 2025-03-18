@@ -1,11 +1,11 @@
 {
-	"id": "clippermaster-plugin-for-obsidian",
+	"id": "clippermaster",
 	"name": "ClipperMaster",
-	"version": "0.1.0",
+	"version": "0.1.3",
 	"minAppVersion": "0.15.0",
 	"description": "ClipperMaster is a plugin for Obsidian that allows you to clip content from the web and save it to your vault.",
 	"author": "ClipperMaster Team",
-	"authorUrl": "https://obsidian.md",
-	"fundingUrl": "https://obsidian.md/pricing",
+	"authorUrl": "https://clippermaster.com/",
+	"fundingUrl": "https://clippermaster.com/",
 	"isDesktopOnly": true
 }
