@@ -1,6 +1,6 @@
 {
 	"name": "clippermaster-plugin-for-obsidian",
-	"version": "0.1.6",
+	"version": "0.1.7",
 	"description": "This is a ClipperMaster Plugin for Obsidian (https://clippermaster.com)",
 	"main": "main.js",
 	"scripts": {
