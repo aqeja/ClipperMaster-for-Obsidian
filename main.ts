@@ -8,18 +8,16 @@ import {
 } from "obsidian";
 import { server } from "server";
 
-// Remember to rename these classes and interfaces!
-
-interface MyPluginSettings {
+interface ClipperMasterPluginSettings {
 	port: number;
 }
 
-const DEFAULT_SETTINGS: MyPluginSettings = {
+const DEFAULT_SETTINGS: ClipperMasterPluginSettings = {
 	port: 8282,
 };
 
 export default class ClipperMasterPlugin extends Plugin {
-	settings: MyPluginSettings;
+	settings: ClipperMasterPluginSettings;
 
 	async onload() {
 		addIcon(
