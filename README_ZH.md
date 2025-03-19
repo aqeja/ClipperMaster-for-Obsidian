@@ -23,7 +23,7 @@ ClipperMaster Obsidian 插件是 **ClipperMaster Chrome 插件** 的完美搭档
 ## **安装步骤**
 
 ### **1. 安装 ClipperMaster Chrome 插件**
-如果你还没有安装 Chrome 插件，请先前往 [Chrome 商店](https://chrome.google.com/webstore) 搜索 **ClipperMaster** 并安装。
+如果你还没有安装 Chrome 插件，请先前往 [Chrome 商店](https://chromewebstore.google.com/detail/clippermaster/bdilooeboaoifijdnpomfoinefbokjlj) 安装。
 
 ### **2. 安装 ClipperMaster Obsidian 插件**
 1. 打开 Obsidian，进入 **设置** → **社区插件**。

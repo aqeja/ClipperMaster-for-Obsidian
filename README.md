@@ -23,7 +23,7 @@ The ClipperMaster Obsidian plugin is the perfect companion to the **ClipperMaste
 ## **Installation Steps**
 
 ### **1. Install the ClipperMaster Chrome Plugin**
-If you haven't installed the Chrome plugin yet, please go to the [Chrome Web Store](https://chrome.google.com/webstore) and search for **ClipperMaster** to install it.
+If not already installed, get the Chrome plugin from the [Chrome Web Store](https://chromewebstore.google.com/detail/clippermaster/bdilooeboaoifijdnpomfoinefbokjlj).
 
 ### **2. Install the ClipperMaster Obsidian Plugin**
 1. Open Obsidian, go to **Settings** → **Community plugins**.
