@@ -1,7 +1,7 @@
 {
 	"id": "clippermaster",
 	"name": "ClipperMaster",
-	"version": "0.1.9",
+	"version": "0.1.8",
 	"minAppVersion": "0.15.0",
 	"description": "ClipperMaster is a plugin that allows you to clip content from the web and save it to your vault.",
 	"author": "ClipperMaster Team",
