@@ -1,6 +1,6 @@
+import { texts, upsertFile, Welcome } from "common";
 import {
 	App,
-	Notice,
 	Plugin,
 	PluginSettingTab,
 	Setting,
@@ -15,6 +15,7 @@ interface ClipperMasterPluginSettings {
 const DEFAULT_SETTINGS: ClipperMasterPluginSettings = {
 	port: 8282,
 };
+
 
 export default class ClipperMasterPlugin extends Plugin {
 	settings: ClipperMasterPluginSettings;
@@ -32,18 +33,17 @@ export default class ClipperMasterPlugin extends Plugin {
 		await this.loadSettings();
 
 		// This adds a settings tab so the user can configure various aspects of the plugin
-		this.addSettingTab(new SampleSettingTab(this.app, this));
+		this.addSettingTab(new ClipperMasterSettingTab(this.app, this));
 
 		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
 		// Using this function will automatically remove the event listener when this plugin is disabled.
 		this.registerDomEvent(document, "click", (evt: MouseEvent) => {
 			console.log("click", evt);
 		});
+		this.onUserEnable = () => {
+			upsertFile(this.app, texts.welcome, Welcome)
+		}
 
-
-		this.addRibbonIcon("clippermaster", "Greet", () => {
-			new Notice("Hello, world!");
-		});
 		server.start(this.app);
 	}
 
@@ -64,14 +64,14 @@ export default class ClipperMasterPlugin extends Plugin {
 	}
 }
 
-class SampleSettingTab extends PluginSettingTab {
+class ClipperMasterSettingTab extends PluginSettingTab {
 	plugin: ClipperMasterPlugin;
 
 	constructor(app: App, plugin: ClipperMasterPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
-	}
 
+	}
 	display(): void {
 		const { containerEl } = this;
 
@@ -80,17 +80,17 @@ class SampleSettingTab extends PluginSettingTab {
 			text: `${this.plugin.manifest.name} ${this.plugin.manifest.version}`,
 		});
 		const portSetting = new Setting(containerEl)
-			.setName("Listening Port")
-			.setDesc("Port to listen for HTTP requests")
+			.setName(texts.listeningPort)
+			.setDesc(texts.desc)
 
 		const invalidPortElement = portSetting.infoEl.createDiv();
 		invalidPortElement.hide();
 		invalidPortElement
 			.createSpan("settings-error-element")
-			.setText("Must be a valid port number (1 - 65535)");
+			.setText(texts.error);
 
 		portSetting.addText((text) => {
-			text.setPlaceholder("Enter Port Number")
+			text.setPlaceholder(texts.enterPort)
 			text.setValue(String(this.plugin.settings.port));
 			text.onChange(async (value) => {
 				const numValue = Number(value);
@@ -101,7 +101,6 @@ class SampleSettingTab extends PluginSettingTab {
 				invalidPortElement.hide();
 				this.plugin.settings.port = numValue;
 				await this.saveAndReload();
-
 			});
 		});
 	}

@@ -1,6 +1,6 @@
 {
 	"name": "clippermaster-plugin-for-obsidian",
-	"version": "0.1.7",
+	"version": "0.1.8",
 	"description": "This is a ClipperMaster Plugin for Obsidian (https://clippermaster.com)",
 	"main": "main.js",
 	"scripts": {
@@ -17,11 +17,11 @@
 		"@typescript-eslint/parser": "5.29.0",
 		"builtin-modules": "3.3.0",
 		"esbuild": "0.17.3",
-		"obsidian": "latest",
 		"tslib": "2.4.0",
 		"typescript": "^5.8.2"
 	},
 	"dependencies": {
-		"fastify": "^4.28.0"
+		"fastify": "^4.28.0",
+		"obsidian": "^1.8.7"
 	}
 }

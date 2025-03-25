@@ -1,4 +1,5 @@
-import { App } from "obsidian";
+import { folderName, texts, upsertFile } from "common";
+import { App, Notice } from "obsidian";
 
 export type ClipperAttribute = Pick<Attribute, "_id" | "key" | 'valueSource'> & { value: unknown };
 
@@ -131,17 +132,15 @@ export class Service {
   constructor(private app: App) {}
   async upsert(clipper: ClipperDoc) {
     this.app.vault.getFolderByPath
-    const folder = await this.app.vault.getFolderByPath('test')
-    if (!folder) {
-      await this.app.vault.createFolder('test')
-    }
-    const title = clipper.attributes?.find(item => item._id === PresetAttributeID.Title)?.value as string
-    const filePath = `test/${title || `Untitled_${clipper._id}`}.md`
-    const file = await this.app.vault.getFileByPath(filePath)
-    if (file) {
-      await this.app.vault.modify(file, generateMDContent(clipper))
-    } else {
-      await this.app.vault.create(`test/${title || `Untitled_${clipper._id}`}.md`, generateMDContent(clipper))
+    let title = clipper.attributes?.find(item => item._id === PresetAttributeID.Title)?.value as string
+    title = title ? title.replace(/[\\/:]/g, '_') : title
+    const fileName = `${title || `Untitled_${clipper._id}`}`
+    try {
+      await upsertFile(this.app, fileName, generateMDContent(clipper))
+
+      new Notice(`${texts.fileSaved} ${folderName}/${fileName}.md`, 5000)
+    } catch (error) {
+      new Notice('ops, save file failed', 5000)
     }
   }
 }
