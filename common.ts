@@ -25,7 +25,10 @@ const getTexts = () => {
 			enterPort: '输入端口号',
 			error: '必须是一个有效的端口号 (1 - 65535)',
 			welcome: '欢迎使用 ClipperMaster for Obsidian',
-      fileSaved:'🎉 已保存到：'
+      fileSaved:'🎉 已保存到：',
+      guidanceButton: '使用说明',
+      guidanceDesc: '点击打开使用说明页面',
+      openGuidance: '打开说明'
 		}
 	}
 	return {
@@ -34,7 +37,10 @@ const getTexts = () => {
 		enterPort: 'Enter Port Number',
 		error: 'Must be a valid port number (1 - 65535)',
 		welcome: 'Welcome to ClipperMaster for Obsidian',
-		fileSaved: '🎉 File saved to:'
+		fileSaved: '🎉 File saved to:',
+    guidanceButton: 'Guidance',
+    guidanceDesc: 'Click to open guidance page',
+    openGuidance: 'Open Guidance'
 	}
 }
 export const texts = getTexts()

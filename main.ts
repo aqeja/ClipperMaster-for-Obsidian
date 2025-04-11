@@ -1,11 +1,5 @@
 import { texts, upsertFile, Welcome } from "common";
-import {
-	App,
-	Plugin,
-	PluginSettingTab,
-	Setting,
-	addIcon,
-} from "obsidian";
+import { App, Plugin, PluginSettingTab, Setting, addIcon } from "obsidian";
 import { server } from "server";
 
 interface ClipperMasterPluginSettings {
@@ -15,7 +9,6 @@ interface ClipperMasterPluginSettings {
 const DEFAULT_SETTINGS: ClipperMasterPluginSettings = {
 	port: 8282,
 };
-
 
 export default class ClipperMasterPlugin extends Plugin {
 	settings: ClipperMasterPluginSettings;
@@ -35,18 +28,11 @@ export default class ClipperMasterPlugin extends Plugin {
 		// This adds a settings tab so the user can configure various aspects of the plugin
 		this.addSettingTab(new ClipperMasterSettingTab(this.app, this));
 
-		// If the plugin hooks up any global DOM events (on parts of the app that doesn't belong to this plugin)
-		// Using this function will automatically remove the event listener when this plugin is disabled.
-		this.registerDomEvent(document, "click", (evt: MouseEvent) => {
-			console.log("click", evt);
-		});
-		this.onUserEnable = () => {
-			upsertFile(this.app, texts.welcome, Welcome)
-		}
-
 		server.start(this.app);
 	}
-
+	onUserEnable() {
+		upsertFile(this.app, texts.welcome, Welcome);
+	}
 	onunload() {
 		server.close();
 	}
@@ -70,18 +56,16 @@ class ClipperMasterSettingTab extends PluginSettingTab {
 	constructor(app: App, plugin: ClipperMasterPlugin) {
 		super(app, plugin);
 		this.plugin = plugin;
-
 	}
 	display(): void {
 		const { containerEl } = this;
 
 		containerEl.empty();
-		containerEl.createEl("h2", {
-			text: `${this.plugin.manifest.name} ${this.plugin.manifest.version}`,
-		});
+
+		// Port setting
 		const portSetting = new Setting(containerEl)
 			.setName(texts.listeningPort)
-			.setDesc(texts.desc)
+			.setDesc(texts.desc);
 
 		const invalidPortElement = portSetting.infoEl.createDiv();
 		invalidPortElement.hide();
@@ -90,7 +74,7 @@ class ClipperMasterSettingTab extends PluginSettingTab {
 			.setText(texts.error);
 
 		portSetting.addText((text) => {
-			text.setPlaceholder(texts.enterPort)
+			text.setPlaceholder(texts.enterPort);
 			text.setValue(String(this.plugin.settings.port));
 			text.onChange(async (value) => {
 				const numValue = Number(value);
@@ -103,15 +87,21 @@ class ClipperMasterSettingTab extends PluginSettingTab {
 				await this.saveAndReload();
 			});
 		});
+
+		// Guidance button setting
+		new Setting(containerEl)
+			.setName(texts.guidanceButton)
+			.setDesc(texts.guidanceDesc)
+			.addButton((btn) => {
+				btn.setButtonText(texts.openGuidance)
+					.onClick(() => {
+						window.open("https://docs.clippermaster.com/docs/integrations/obsidian", "_blank");
+					});
+			});
 	}
 	async saveAndReload() {
 		await this.plugin.saveSettings();
-		await server.close()
-
-		// const serverIsRunning = !!this.plugin.serverController?.isRunning();
-		// if (serverIsRunning) {
-		//   await this.plugin.stopServer();
-		//   await this.plugin.startServer();
-		// }
+		await server.close();
+		server.start(this.plugin.app);
 	}
 }
