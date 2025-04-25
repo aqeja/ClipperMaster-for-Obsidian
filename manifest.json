@@ -1,9 +1,9 @@
 {
 	"id": "clippermaster",
 	"name": "ClipperMaster",
-	"version": "0.1.9",
+	"version": "0.1.10",
 	"minAppVersion": "0.15.0",
-	"description": "Works with the ClipperMaster Chrome extension to clip structured content from the web and save it to your Obsidian vault as Markdown files.",
+	"description": "Works with the ClipperMaster Chrome extension to clip structured content from the web and save it to your vault as Markdown files.",
 	"author": "ClipperMaster Team",
 	"authorUrl": "https://clippermaster.com/",
 	"isDesktopOnly": true
